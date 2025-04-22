@@ -1,0 +1,148 @@
+@import "../styles/variables";
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: $background-color;
+}
+
+.app-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+
+  button {
+    background: none;
+    border: none;
+    color: $primary-color;
+    cursor: pointer;
+
+    &.logout-btn {
+      color: $error-color;
+    }
+  }
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+h3 {
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.submit-btn {
+  padding: 8px 16px;
+  background-color: $primary-color;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.phone-entry {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+
+  h1 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+  }
+
+  input {
+    width: 200px;
+  }
+
+  button {
+    padding: 8px 16px;
+    background-color: $primary-color;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+}
+
+.appointment-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+
+  button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-right: 10px;
+
+    &:first-child {
+      color: $primary-color;
+    }
+
+    &:last-child {
+      color: $error-color;
+    }
+  }
+}
+
+.error {
+  color: $error-color;
+  margin-bottom: 10px;
+}
+
+/* Style cho react-multistep */
+.step-title {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+
+  div {
+    cursor: pointer;
+    padding: 5px 10px;
+    border-bottom: 2px solid transparent;
+
+    &.active {
+      border-bottom: 2px solid $primary-color;
+      font-weight: bold;
+    }
+  }
+}
+
+.btn-prev,
+.btn-next {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-prev {
+  background-color: $secondary-color;
+  color: white;
+}
+
+.btn-next {
+  background-color: $primary-color;
+  color: white;
+}
