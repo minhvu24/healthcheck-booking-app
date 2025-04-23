@@ -8,6 +8,8 @@ export const RESET = "RESET";
 export const FETCH_APPOINTMENTS = "FETCH_APPOINTMENTS";
 export const CREATE_APPOINTMENT = "CREATE_APPOINTMENT";
 export const UPDATE_APPOINTMENT_STATUS = "UPDATE_APPOINTMENT_STATUS";
+export const FETCH_APPOINTMENT_DETAIL = "FETCH_APPOINTMENT_DETAIL";
+export const SET_APPOINTMENT_DETAIL = "SET_APPOINTMENT_DETAIL";
 
 // Action Creators
 export const setField = (field: string, value: any) => ({
@@ -38,4 +40,14 @@ export const createAppointment = (appointmentData: Omit<Appointment, "appointmen
 export const updateAppointmentStatus = (appointmentId: number, status: Appointment["status"]) => ({
   type: UPDATE_APPOINTMENT_STATUS,
   payload: { appointmentId, status },
+});
+
+export const fetchAppointmentDetail = (appointmentId: number) => ({
+  type: FETCH_APPOINTMENT_DETAIL,
+  payload: { appointmentId },
+});
+
+export const setAppointmentDetail = (appointment: Appointment) => ({
+  type: SET_APPOINTMENT_DETAIL,
+  payload: appointment,
 });

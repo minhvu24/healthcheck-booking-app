@@ -1,0 +1,49 @@
+
+.info-section {
+  margin-bottom: 25px;
+}
+
+.info-section h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 15px;
+  text-align: left;
+}
+
+.info-section p {
+  font-size: 14px;
+  color: #666; /* Màu xám giống template */
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.info-label {
+  font-weight: 500;
+  color: #555; /* Màu xám đậm hơn một chút để làm nổi bật nhãn */
+  display: inline-block;
+  min-width: 120px; /* Đảm bảo các nhãn có độ dài đồng đều */
+}
+
+@media (max-width: 480px) {
+  .step4-container {
+    max-width: 90%;
+    padding: 20px;
+  }
+
+  .step4-container h2 {
+    font-size: 18px;
+  }
+
+  .info-section h3 {
+    font-size: 14px;
+  }
+
+  .info-section p {
+    font-size: 13px;
+  }
+
+  .info-label {
+    min-width: 100px;
+  }
+}

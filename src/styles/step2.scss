@@ -1,0 +1,72 @@
+
+.step2-container h2 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 25px;
+  color: #333;
+  text-align: left;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: #666; /* Màu xám giống template */
+}
+
+.form-select {
+  width: 100%;
+  padding: 12px 15px;
+  border: 1px solid #e0e0e0; /* Viền nhạt */
+  border-radius: 10px; /* Bo góc giống template */
+  font-size: 16px;
+  color: #333;
+  background-color: white;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  appearance: none; /* Bỏ giao diện mặc định của select */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 16px;
+}
+
+.form-select:focus {
+  outline: none;
+  border-color: #00aaff; /* Màu xanh dương giống template */
+  box-shadow: 0 0 5px rgba(0, 170, 255, 0.2); /* Bóng nhẹ khi focus */
+}
+
+.form-select option {
+  color: #333;
+}
+.form-select.error {
+  border-color: #ff0000; /* Viền đỏ khi có lỗi */
+}
+.error-message {
+  display: block;
+  color: #ff0000; /* Chữ đỏ cho thông báo lỗi */
+  font-size: 12px;
+  margin-top: 5px;
+}
+
+@media (max-width: 480px) {
+  .step2-container {
+    max-width: 90%;
+    padding: 20px;
+  }
+
+  .step2-container h2 {
+    font-size: 18px;
+  }
+
+  .form-select {
+    font-size: 14px;
+    padding: 10px 12px;
+    background-size: 14px;
+  }
+}

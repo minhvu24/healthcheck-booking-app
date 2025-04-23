@@ -1,14 +1,14 @@
 export interface Appointment {
   appointmentId: number;
-  patientName: string;
-  phoneNumber: string;
-  email: string;
+  patientName?: string;
+  phoneNumber?: string;
+  email?: string;
   appointmentDate: string;
   appointmentTime: string;
-  doctorId: number;
-  checkupType: string;
-  additionalNotes: string;
-  status: "pending" | "rejected" | "approved" | "cancelled" | "completed";
+  doctorName: string;
+  doctorSpecialization: string;
+  status: string;
+  additionalNotes?: string;
 }
 
 export interface AppState {
@@ -22,4 +22,5 @@ export interface AppState {
   time: string;
   appointments: Appointment[];
   error: string | null;
+  appointmentDetail: Appointment | null;
 }

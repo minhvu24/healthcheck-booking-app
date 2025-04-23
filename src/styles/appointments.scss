@@ -1,0 +1,259 @@
+
+.search-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.search-input {
+  width: 300px;
+  padding: 10px 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  font-size: 16px;
+  margin-right: 10px;
+  transition: border-color 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #00aaff;
+  box-shadow: 0 0 5px rgba(0, 170, 255, 0.2);
+}
+
+.search-btn {
+  padding: 10px 20px;
+  background: white;
+  color: #00aaff;
+  border: 2px solid #00aaff;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.search-btn:hover {
+  background: #e5f3f8;
+  color: #2e6da4;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.appointment-table {
+  width: 100%;
+  min-width: 800px;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.appointment-table th,
+.appointment-table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #e0e0e0;
+  white-space: nowrap;
+}
+
+.appointment-table th {
+  background: #f5f5f5;
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.appointment-table td {
+  font-size: 14px;
+  color: #666;
+}
+
+.date-col {
+  width: 120px;
+}
+
+.time-col {
+  width: 100px;
+}
+
+.doctor-col {
+  width: 150px;
+}
+
+.specialization-col {
+  width: 200px;
+}
+
+.status-col {
+  width: 100px;
+}
+
+.actions-col {
+  width: 200px;
+}
+
+.actions {
+  display: flex;
+  gap: 5px;
+}
+
+.detail-btn,
+.edit-btn,
+.cancel-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 5px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.detail-btn {
+  background: #28a745;
+  color: white;
+}
+
+.detail-btn:hover {
+  background: #218838;
+}
+
+.edit-btn {
+  background: #00aaff;
+  color: white;
+}
+
+.edit-btn:hover {
+  background: #0088cc;
+}
+
+.cancel-btn {
+  background: #ff4d4d;
+  color: white;
+}
+
+.cancel-btn:hover {
+  background: #cc0000;
+}
+
+/* Modal styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 20px;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  max-width: 90%;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.modal-body {
+  margin-bottom: 20px;
+}
+
+.modal-body p {
+  margin: 8px 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.modal-body p strong {
+  color: #333;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.close-btn {
+  padding: 8px 16px;
+  background: #ccc;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.close-btn:hover {
+  background: #999;
+}
+
+@media (max-width: 768px) {
+  .appointments-container {
+    max-width: 90%;
+    padding: 20px;
+  }
+
+  .appointments-container h2 {
+    font-size: 18px;
+  }
+
+  .search-input {
+    width: 200px;
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .search-btn {
+    padding: 8px 15px;
+    font-size: 13px;
+  }
+
+  .appointment-table th,
+  .appointment-table td {
+    font-size: 12px;
+    padding: 10px;
+  }
+
+  .detail-btn,
+  .edit-btn,
+  .cancel-btn {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+
+  .modal-content {
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-section {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .search-input {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .appointment-table th,
+  .appointment-table td {
+    font-size: 12px;
+    padding: 8px;
+  }
+}

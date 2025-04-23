@@ -4,60 +4,72 @@ import { API_BASE_URL } from "../env";
 import { FETCH_APPOINTMENTS, CREATE_APPOINTMENT, UPDATE_APPOINTMENT_STATUS, setAppointments, setError, setField } from "../redux/actions";
 import { AppState, Appointment } from "../types";
 
-// Định nghĩa kiểu cho các giá trị trả về của axios
 type FetchAppointmentsResponse = AxiosResponse<Appointment[]>;
 type CreateAppointmentResponse = AxiosResponse<Appointment>;
 type UpdateAppointmentResponse = AxiosResponse<void>;
 
-// Selector để lấy phoneNumber
 const getPhoneNumber = (state: { app: AppState }) => state.app.phoneNumber;
 
-// Hàm wrapper cho axios.get
 const fetchAppointments = (phoneNumber: string): Promise<FetchAppointmentsResponse> =>
     axios.get<Appointment[]>(`${API_BASE_URL}/appointments`, {
       headers: { patient_phone_number: phoneNumber },
       params: { phoneNumber },
     });
 
-// Hàm wrapper cho axios.post
 const createAppointmentRequest = (data: any, phoneNumber: string): Promise<CreateAppointmentResponse> =>
     axios.post<Appointment>(`${API_BASE_URL}/appointments`, data, {
       headers: { patient_phone_number: phoneNumber },
     });
 
-// Hàm wrapper cho axios.patch
 const updateAppointmentStatusRequest = (appointmentId: number, status: string, phoneNumber: string): Promise<UpdateAppointmentResponse> =>
     axios.patch<void>(`${API_BASE_URL}/appointments/${appointmentId}`, { status }, {
       headers: { patient_phone_number: phoneNumber },
     });
 
-// Saga để lấy danh sách appointments
 function* fetchAppointmentsSaga(): Generator<SelectEffect | CallEffect | PutEffect, void, any> {
   try {
     const phoneNumber: SagaReturnType<typeof select> = yield select(getPhoneNumber);
+    console.log("Fetching appointments for phoneNumber:", phoneNumber);
     const response: FetchAppointmentsResponse = yield call(fetchAppointments as (...args: any[]) => Promise<FetchAppointmentsResponse>, phoneNumber);
+    console.log("Fetch appointments response:", response.data);
     yield put(setAppointments(response.data));
   } catch (error: any) {
-    yield put(setError(error.message));
+    console.error("Error fetching appointments:", error.message);
+    if (error.response?.status === 404) {
+      yield put(setAppointments([])); // Đặt appointments thành mảng rỗng nếu không tìm thấy
+    } else {
+      yield put(setError(error.message));
+    }
   }
 }
 
-// Saga để tạo appointment
 function* createAppointmentSaga(action: any): Generator<CallEffect | PutEffect, void, CreateAppointmentResponse> {
   try {
+    const apiData = {
+      patientName: action.payload.patientName,
+      phoneNumber: action.payload.phoneNumber,
+      email: action.payload.email,
+      appointmentDate: action.payload.appointmentDate,
+      appointmentTime: action.payload.appointmentTime,
+      doctorId: 1,
+      checkupType: action.payload.doctorSpecialization,
+      additionalNotes: action.payload.additionalNotes,
+    };
+
     const response: CreateAppointmentResponse = yield call(
         createAppointmentRequest as (...args: any[]) => Promise<CreateAppointmentResponse>,
-        action.payload,
+        apiData,
         action.payload.phoneNumber
     );
+    console.log("Created appointment:", response.data);
     yield call(fetchAppointmentsSaga);
-    yield put(setField("step", 5)); // Chuyển sang bước "View My Appointments" sau khi tạo thành công
+    yield put(setField("step", 5));
   } catch (error: any) {
+    console.error("Error creating appointment:", error.message);
     yield put(setError(error.message));
   }
 }
 
-// Saga để cập nhật trạng thái appointment
 function* updateAppointmentStatusSaga(action: any): Generator<SelectEffect | CallEffect | PutEffect, void, any> {
   try {
     const phoneNumber: SagaReturnType<typeof select> = yield select(getPhoneNumber);
@@ -69,11 +81,11 @@ function* updateAppointmentStatusSaga(action: any): Generator<SelectEffect | Cal
     );
     yield call(fetchAppointmentsSaga);
   } catch (error: any) {
+    console.error("Error updating appointment status:", error.message);
     yield put(setError(error.message));
   }
 }
 
-// Root saga
 export default function* rootSaga(): Generator<any, void, unknown> {
   yield takeEvery(FETCH_APPOINTMENTS, fetchAppointmentsSaga);
   yield takeEvery(CREATE_APPOINTMENT, createAppointmentSaga);

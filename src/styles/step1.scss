@@ -1,0 +1,116 @@
+//.step1-container {
+//  width: 100%; /* Thu hẹp chiều rộng giống template */
+//  margin: 20px auto;
+//  padding: 25px;
+//  background: white;
+//  border-radius: 15px; /* Viền tròn giống template */
+//  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); /* Bóng đổ nhẹ */
+//  font-family: 'Arial', sans-serif;
+//}
+//
+//.step1-container h2 {
+//  font-size: 20px; /* Font nhỏ hơn để giống template */
+//  font-weight: 600;
+//  margin-bottom: 25px;
+//  color: #333;
+//  text-align: left; /* Căn trái giống template */
+//}
+//
+//.form-group {
+//  margin-bottom: 20px; /* Khoảng cách giữa các ô */
+//}
+//
+//
+.form-input {
+  width: 100%;
+  padding: 11px 14px;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+  margin-bottom: 13px;
+}
+.form-input.error {
+  border-color: #ff0000; /* Viền đỏ khi có lỗi */
+}
+
+.error-message {
+  display: block;
+  color: #ff0000; /* Chữ đỏ cho thông báo lỗi */
+  font-size: 12px;
+  margin-top: 5px;
+}
+//
+//.form-input:focus {
+//  outline: none;
+//  border-color: #00aaff; /* Màu xanh dương giống thanh tiến trình */
+//  box-shadow: 0 0 5px rgba(0, 170, 255, 0.2); /* Bóng nhẹ khi focus */
+//}
+//
+//.form-input::placeholder {
+//  color: #bbb; /* Placeholder nhạt */
+//  font-style: normal; /* Bỏ italic */
+//}
+//
+//.form-input.disabled {
+//  background-color: #f0f0f0; /* Nền xám nhạt giống template */
+//  color: #999;
+//  cursor: not-allowed;
+//}
+//
+///* Tùy chỉnh nút Prev và Next của react-multistep */
+:global(.btn-prev) {
+  padding: 8px 20px;
+  margin-right: 10px;
+  background: #f5f5f5; /* Nền xám nhạt */
+  color: #666; /* Chữ xám */
+  border: 1px solid #e0e0e0; /* Viền xám nhạt */
+  border-radius: 10px; /* Bo góc giống template */
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+:global(.btn-prev:hover) {
+  background: #e0e0e0; /* Hiệu ứng hover */
+  color: #333;
+}
+//
+//:global(.btn-next) {
+//  padding: 8px 20px;
+//  background: #00aaff; /* Màu xanh dương giống thanh tiến trình */
+//  color: white;
+//  border: none;
+//  border-radius: 10px; /* Bo góc giống template */
+//  font-size: 14px;
+//  font-weight: 500;
+//  cursor: pointer;
+//  transition: background 0.3s ease;
+//}
+//
+//:global(.btn-next:hover) {
+//  background: #0088cc; /* Hiệu ứng hover */
+//}
+//
+//@media (max-width: 480px) {
+//  .step1-container {
+//    max-width: 90%;
+//    padding: 20px;
+//  }
+//
+//  .step1-container h2 {
+//    font-size: 18px;
+//  }
+//
+//  .form-input {
+//    font-size: 14px;
+//    padding: 10px 12px;
+//  }
+//
+//  :global(.btn-prev),
+//  :global(.btn-next) {
+//    padding: 6px 15px;
+//    font-size: 13px;
+//  }
+//}
