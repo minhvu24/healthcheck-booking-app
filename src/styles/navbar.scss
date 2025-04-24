@@ -1,0 +1,39 @@
+.navbar {
+  background-color: blue;
+  padding: 10px 20px;
+}
+
+.nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-list li {
+  display: inline-block;
+}
+
+.nav-list li button {
+  background: none;
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 5px 10px;
+  transition: text-decoration 0.3s ease;
+}
+
+.nav-list li button:hover {
+  text-decoration: underline;
+}
+
+.logout-btn {
+  color: white !important; // Đảm bảo nút Logout cũng có màu trắng
+}
+
+.logout-btn:hover {
+  text-decoration: underline;
+}

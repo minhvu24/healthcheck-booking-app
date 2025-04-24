@@ -12,6 +12,7 @@ export const FETCH_APPOINTMENT_DETAIL = "FETCH_APPOINTMENT_DETAIL";
 export const SET_APPOINTMENT_DETAIL = "SET_APPOINTMENT_DETAIL";
 export const SET_CREATING_APPOINTMENT = "SET_CREATING_APPOINTMENT"; // Thêm action mới
 export const RESET_STATE = "RESET_STATE";
+export const SET_PAGINATION = "SET_PAGINATION"; // Thêm action mới
 // Action Creators
 export const setField = (field: string, value: any) => ({
   type: SET_FIELD,
@@ -31,7 +32,7 @@ export const setError = (error: string | null) => ({
   payload: error,
 });
 
-export const fetchAppointments = () => ({ type: FETCH_APPOINTMENTS });
+export const fetchAppointments = (page?: number, size?: number, searchPhone?: string) => ({ type: FETCH_APPOINTMENTS,payload: { page, size, searchPhone }, });
 
 export const createAppointment = (appointmentData: Omit<Appointment, "appointmentId" | "status">) => ({
   type: CREATE_APPOINTMENT,
@@ -59,4 +60,8 @@ export const setCreatingAppointment = (isCreating: boolean) => ({
 });
 export const resetState = () => ({
   type: RESET_STATE,
+});
+export const setPagination = (pagination: { page: number; size: number; totalItems: number }) => ({
+  type: SET_PAGINATION,
+  payload: pagination,
 });

@@ -26,4 +26,14 @@ export interface AppState {
   error: string | null;
   appointmentDetail: Appointment | null;
   isCreatingAppointment: boolean;
+  page: number;
+  size: number;
+  totalItems: number;
+}
+
+export interface FetchAppointmentsResponse {
+  appointments: Appointment[];
+  page: number;
+  size: number;
+  totalItems: number;
 }
