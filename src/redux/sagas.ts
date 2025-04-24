@@ -1,7 +1,15 @@
 import { takeEvery, put, call, select, CallEffect, SelectEffect, PutEffect, SagaReturnType } from "redux-saga/effects";
 import axios, { AxiosResponse } from "axios";
 import { API_BASE_URL } from "../env";
-import { FETCH_APPOINTMENTS, CREATE_APPOINTMENT, UPDATE_APPOINTMENT_STATUS, setAppointments, setError, setField } from "../redux/actions";
+import {
+  FETCH_APPOINTMENTS,
+  CREATE_APPOINTMENT,
+  UPDATE_APPOINTMENT_STATUS,
+  setAppointments,
+  setError,
+  setField,
+  setCreatingAppointment, resetState
+} from "../redux/actions";
 import { AppState, Appointment } from "../types";
 
 type FetchAppointmentsResponse = AxiosResponse<Appointment[]>;
@@ -29,22 +37,17 @@ const updateAppointmentStatusRequest = (appointmentId: number, status: string, p
 function* fetchAppointmentsSaga(): Generator<SelectEffect | CallEffect | PutEffect, void, any> {
   try {
     const phoneNumber: SagaReturnType<typeof select> = yield select(getPhoneNumber);
-    console.log("Fetching appointments for phoneNumber:", phoneNumber);
     const response: FetchAppointmentsResponse = yield call(fetchAppointments as (...args: any[]) => Promise<FetchAppointmentsResponse>, phoneNumber);
-    console.log("Fetch appointments response:", response.data);
     yield put(setAppointments(response.data));
   } catch (error: any) {
-    console.error("Error fetching appointments:", error.message);
-    if (error.response?.status === 404) {
-      yield put(setAppointments([])); // Đặt appointments thành mảng rỗng nếu không tìm thấy
-    } else {
-      yield put(setError(error.message));
-    }
+    yield put(setError(error.message));
   }
 }
 
 function* createAppointmentSaga(action: any): Generator<CallEffect | PutEffect, void, CreateAppointmentResponse> {
   try {
+    yield put(setCreatingAppointment(true));
+    // Ánh xạ dữ liệu để khớp với định dạng API mong đợi
     const apiData = {
       patientName: action.payload.patientName,
       phoneNumber: action.payload.phoneNumber,
@@ -61,12 +64,13 @@ function* createAppointmentSaga(action: any): Generator<CallEffect | PutEffect, 
         apiData,
         action.payload.phoneNumber
     );
-    console.log("Created appointment:", response.data);
     yield call(fetchAppointmentsSaga);
-    yield put(setField("step", 5));
+    yield put(resetState()); // Reset state nhưng giữ phoneNumber
+    yield put(setField("step", 5)); // Chuyển sang trang Appointments
+    yield put(setCreatingAppointment(false)); // Kết thúc tạo cuộc hẹn
   } catch (error: any) {
-    console.error("Error creating appointment:", error.message);
     yield put(setError(error.message));
+    yield put(setCreatingAppointment(false));
   }
 }
 
@@ -81,7 +85,6 @@ function* updateAppointmentStatusSaga(action: any): Generator<SelectEffect | Cal
     );
     yield call(fetchAppointmentsSaga);
   } catch (error: any) {
-    console.error("Error updating appointment status:", error.message);
     yield put(setError(error.message));
   }
 }

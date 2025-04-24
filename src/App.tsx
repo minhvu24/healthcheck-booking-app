@@ -12,7 +12,7 @@ import "./styles/main.scss";
 
 const App = () => {
   const dispatch = useDispatch();
-  const { phoneNumber, email, fullName, specialization, doctor, date, time, step, error } = useSelector(
+  const { phoneNumber, email, fullName, specialization, doctor, date, time, step, error,isCreatingAppointment } = useSelector(
       (state: { app: AppState }) => state.app
   );
 
@@ -31,7 +31,15 @@ const App = () => {
   useEffect(() => {
     setCurrentStep(step || 1);
   }, [step]);
-
+  useEffect(() => {
+    // Theo dõi isCreatingAppointment để reset state cục bộ sau khi API thành công
+    if (!isCreatingAppointment && step === 5) {
+      setLocalPhoneNumber("");
+      setIsStep1Valid(false);
+      setIsStep2Valid(false);
+      setIsStep3Valid(false);
+    }
+  }, [isCreatingAppointment, step]);
   const handleSubmit = () => {
     const appointmentData = {
       patientName: fullName,

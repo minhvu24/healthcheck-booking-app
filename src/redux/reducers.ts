@@ -1,5 +1,11 @@
 import { AppState } from "../types";
-import { SET_FIELD, SET_APPOINTMENTS, SET_ERROR, SET_APPOINTMENT_DETAIL } from "../redux/actions";
+import {
+  SET_FIELD,
+  SET_APPOINTMENTS,
+  SET_ERROR,
+  SET_APPOINTMENT_DETAIL,
+  RESET_STATE
+} from "../redux/actions";
 
 const initialState: AppState = {
   step: 1,
@@ -13,6 +19,7 @@ const initialState: AppState = {
   appointments: [],
   error: null,
   appointmentDetail: null,
+  isCreatingAppointment: false,
 };
 
 const appReducer = (state = initialState, action: any): AppState => {
@@ -24,13 +31,21 @@ const appReducer = (state = initialState, action: any): AppState => {
         return state;
       }
       return { ...state, [action.field]: action.value };
-    case SET_APPOINTMENTS:{
-      const newState = { ...state, appointments: action.payload || [] };
-      return newState;}
+    case SET_APPOINTMENTS: {
+      const appointments = action.payload?.appointments || action.payload || [];
+      return {...state, appointments};
+    }
     case SET_ERROR:
       return { ...state, error: action.payload };
     case SET_APPOINTMENT_DETAIL:
       return { ...state, appointmentDetail: action.payload };
+    case RESET_STATE:
+      return {
+        ...initialState,
+        phoneNumber: state.phoneNumber,
+        appointments: state.appointments,
+        appointmentDetail: state.appointmentDetail,
+      };
     default:
       return state;
   }

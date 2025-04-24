@@ -101,7 +101,6 @@ const Appointments = () => {
                   <th className="date-col">Date</th>
                   <th className="time-col">Time</th>
                   <th className="doctor-col">Doctor</th>
-                  <th className="specialization-col">Specialization</th>
                   <th className="status-col">Status</th>
                   <th className="actions-col">Actions</th>
                 </tr>
@@ -109,10 +108,9 @@ const Appointments = () => {
                 <tbody>
                 {filteredAppointments.map((appointment) => (
                     <tr key={appointment.appointmentId}>
-                      {/*<td className="date-col">{appointment.appointmentDate}</td>*/}
-                      {/*<td className="time-col">{appointment.appointmentTime}</td>*/}
+                      <td className="date-col">{appointment.date}</td>
+                      <td className="time-col">{appointment.time}</td>
                       <td className="doctor-col">{appointment.doctorName}</td>
-                      <td className="specialization-col">{appointment.doctorSpecialization}</td>
                       <td className="status-col">{appointment.status}</td>
                       <td className="actions-col">
                         <div className="actions">

@@ -9,6 +9,8 @@ export interface Appointment {
   doctorSpecialization: string;
   status: string;
   additionalNotes?: string;
+  date?: string;
+  time?: string;
 }
 
 export interface AppState {
@@ -23,4 +25,5 @@ export interface AppState {
   appointments: Appointment[];
   error: string | null;
   appointmentDetail: Appointment | null;
+  isCreatingAppointment: boolean;
 }

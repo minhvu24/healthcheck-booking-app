@@ -10,7 +10,8 @@ export const CREATE_APPOINTMENT = "CREATE_APPOINTMENT";
 export const UPDATE_APPOINTMENT_STATUS = "UPDATE_APPOINTMENT_STATUS";
 export const FETCH_APPOINTMENT_DETAIL = "FETCH_APPOINTMENT_DETAIL";
 export const SET_APPOINTMENT_DETAIL = "SET_APPOINTMENT_DETAIL";
-
+export const SET_CREATING_APPOINTMENT = "SET_CREATING_APPOINTMENT"; // Thêm action mới
+export const RESET_STATE = "RESET_STATE";
 // Action Creators
 export const setField = (field: string, value: any) => ({
   type: SET_FIELD,
@@ -50,4 +51,12 @@ export const fetchAppointmentDetail = (appointmentId: number) => ({
 export const setAppointmentDetail = (appointment: Appointment) => ({
   type: SET_APPOINTMENT_DETAIL,
   payload: appointment,
+});
+
+export const setCreatingAppointment = (isCreating: boolean) => ({
+  type: SET_CREATING_APPOINTMENT,
+  payload: isCreating,
+});
+export const resetState = () => ({
+  type: RESET_STATE,
 });
