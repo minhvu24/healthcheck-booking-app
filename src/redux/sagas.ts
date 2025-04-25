@@ -34,7 +34,7 @@ const createAppointmentRequest = (data: any, phoneNumber: string): Promise<Creat
     });
 
 const updateAppointmentStatusRequest = (appointmentId: number, status: string, phoneNumber: string): Promise<UpdateAppointmentResponse> =>
-    axios.patch<void>(`${API_BASE_URL}/appointments/${appointmentId}`, { status }, {
+    axios.patch<void>(`${API_BASE_URL}/appointments/${appointmentId}/status`, { status }, {
       headers: { patient_phone_number: phoneNumber },
     });
 

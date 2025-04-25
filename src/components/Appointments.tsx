@@ -15,6 +15,8 @@ const Appointments = () => {
 
   const [searchPhone, setSearchPhone] = useState("");
   const [filteredAppointments, setFilteredAppointments] = useState(appointments);
+  const [showModal, setShowModal] = useState(false); // Trạng thái hiển thị modal
+  const [selectedAppointmentId, setSelectedAppointmentId] = useState<number | null>(null); // appointmentId cần hủy
 
   useEffect(() => {
     if (phoneNumber && !searchPhone) {
@@ -38,8 +40,24 @@ const Appointments = () => {
     dispatch(setField("step", 1));
   };
 
-  const handleCancel = (appointmentId: number) => {
-    dispatch(updateAppointmentStatus(appointmentId, "cancelled"));
+  const handleCancelClick = (appointmentId: number, status: string) => {
+    if (status === "pending") {
+      setSelectedAppointmentId(appointmentId);
+      setShowModal(true); // Hiển thị modal nếu status là pending
+    }
+  };
+
+  const handleConfirmCancel = () => {
+    if (selectedAppointmentId !== null) {
+      dispatch(updateAppointmentStatus(selectedAppointmentId, "cancelled")); // Cập nhật trạng thái
+    }
+    setShowModal(false); // Đóng modal
+    setSelectedAppointmentId(null); // Reset appointmentId
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false); // Đóng modal
+    setSelectedAppointmentId(null); // Reset appointmentId
   };
 
   const handleSearch = () => {
@@ -66,7 +84,7 @@ const Appointments = () => {
     }
   };
 
-  const validSize = 10; // Thay đổi thành 10
+  const validSize = 10;
   const validTotalItems = typeof totalItems === "number" ? totalItems : 0;
   const totalPages = Math.ceil(validTotalItems / validSize) || 1;
   console.log("Pagination info:", { page, size: validSize, totalItems, totalPages });
@@ -136,7 +154,9 @@ const Appointments = () => {
                                         Edit
                                       </button>
                                       <button
-                                          onClick={() => handleCancel(appointment.appointmentId)}
+                                          onClick={() =>
+                                              handleCancelClick(appointment.appointmentId, appointment.status)
+                                          }
                                           className="cancel-btn"
                                       >
                                         Cancel
@@ -152,9 +172,6 @@ const Appointments = () => {
               </div>
 
               <div className="pagination">
-                 <span>
-              Page {page} of {totalPages} (Total: {validTotalItems} appointments)
-            </span>
                 <button
                     onClick={() => handlePageChange(page - 1)}
                     disabled={page === 1}
@@ -162,6 +179,9 @@ const Appointments = () => {
                 >
                   Previous
                 </button>
+                <span>
+              Page {page} of {totalPages} (Total: {validTotalItems} appointments)
+            </span>
                 <button
                     onClick={() => handlePageChange(page + 1)}
                     disabled={page === totalPages}
@@ -173,6 +193,23 @@ const Appointments = () => {
             </>
         ) : (
             <p>Error: Appointments data is not in the expected format.</p>
+        )}
+
+        {/* Modal xác nhận hủy lịch khám */}
+        {showModal && (
+            <div className="modal-overlay">
+              <div className="modal">
+                <h3>Bạn có muốn hủy lịch khám không?</h3>
+                <div className="modal-buttons">
+                  <button onClick={handleConfirmCancel} className="modal-confirm-btn">
+                    Đồng ý
+                  </button>
+                  <button onClick={handleCloseModal} className="modal-cancel-btn">
+                    Hủy
+                  </button>
+                </div>
+              </div>
+            </div>
         )}
       </div>
   );
